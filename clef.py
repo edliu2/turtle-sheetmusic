@@ -12,6 +12,8 @@ def drawline(t, length):
 
 def draw_5_line(t, length, gap):
     """Draws 5 lines of length 'length' spaced 'gap' units apart."""
+    t.ht()
+    t.speed(0)
     for i in range(5):
         drawline(t, length)
         t.left(90)
@@ -50,6 +52,7 @@ def draw_clef(t, tilt, x, y):
     """Draws a treble clef starting at position (x,y) with tilt angle 'tilt' using Turtle t.
     May not work for tilt angles other than 10.
     """
+    t.speed(0)
     t.up()
     t.seth(0)
     t.goto(x + 3, y)
@@ -117,70 +120,43 @@ def flatoval(turtle, r):  # Horizontal Oval
         draw_partof_circle(turtle, r / 2, 0.25, True, 4, 1, 25)
 
 
-def draw_measure(t, init_gap, measure_gap, num_lines):
-    t.left(90)
-    drawline(t, 80)
-    t.right(90)
-    t.forward(init_gap)
-    t.left(90)
-    drawline(t, 80)
-    for i in range(num_lines):
-        t.right(90)
-        t.forward(measure_gap)
-        t.left(90)
-        drawline(t, 80)
 
-
-# def notes(notestring):
-#     pass
+def read_notes(notestring):
+    pass
 # for char in notestring:
 
-# return coordinates
+# return
+def main():
+    s = turtle.Screen()
+    border = 0
+    aspect_ratio = 1
+    x_max = 630
+    s.setworldcoordinates(0 - border, 20 - x_max / aspect_ratio / 2 - border, x_max - border,
+                          x_max / aspect_ratio / 2 + 20 - border)
+    # print(x_max / ((x_max / aspect_ratio / 2) + 20 - (20 - x_max / aspect_ratio / 2)))
+    # make the stave
+    liner = turtle.Turtle()
+    draw_5_line(liner, x_max - border, 20)
 
+    # draw the clef
+    arcy = turtle.Turtle()
+    draw_clef(arcy, 10, 25, -20)
 
-s = turtle.Screen()
-border = 0
-aspect_ratio = 1
-x_max = 630
-s.setworldcoordinates(0 - border, 20 - x_max / aspect_ratio / 2 - border, x_max - border,
-                      x_max / aspect_ratio / 2 + 20 - border)
-# print(x_max / ((x_max / aspect_ratio / 2) + 20 - (20 - x_max / aspect_ratio / 2)))
-# make the stave
-liner = turtle.Turtle()
-liner.ht()
-liner.speed(0)
-draw_5_line(liner, x_max - border, 20)
+    # read in a notestring and create note objects
+    with open('test_notes.txt', 'r') as myfile:
+        for line in myfile:
+            list_of_notes = read_notes(line)
 
-# draw the clef
-arcy = turtle.Turtle()
-arcy.speed(0)
-draw_clef(arcy, 10, 25, -20)
+    # draw measurelines and notes
+    # notes('')
+    player = turtle.Turtle()
+    player.ht()
+    player.speed(0)
+    player.width(2)
+    # for notes in list_of_notes:
+        # notes.draw()
 
-# draw measurelines
-meas = turtle.Turtle()
-meas.ht()
-meas.width(2)
-draw_measure(meas, 190, 150, 3)
+    s.exitonclick()
 
-# draw notes
-# notes('CCGGHHG*FFEEDDC*')
-player = turtle.Turtle()
-player.ht()
-player.speed(0)
-player.width(2)
-quarternote(player, 70, -20)
-quarternote(player, 100, -20)
-quarternote(player, 130, 20)
-quarternote(player, 160, 20)
-quarternote(player, 220, 30)
-quarternote(player, 250, 30)
-halfnote(player, 280, 20)
-quarternote(player, 370, 10)
-quarternote(player, 400, 10)
-quarternote(player, 430, 0)
-quarternote(player, 460, 0)
-quarternote(player, 520, -10)
-quarternote(player, 550, -10)
-halfnote(player, 580, -20)
-
-s.exitonclick()
+if __name__ == '__main__':
+    main()
