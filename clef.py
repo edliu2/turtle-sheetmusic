@@ -149,19 +149,21 @@ def read_notes(notestring, x_start=70, x_spacing=30, y_spacing=10):
         for measure in measure_list:
             note_charlist = list(filter(None, re.findall(pattern, measure)))
             note_charlist.append('|')
-            print(note_charlist)
+            # print(note_charlist)
+            note_object_list = []
             for note in note_charlist:
                 if note == '|':
-                    # new_measure(x_start)
+                    # m = new_measure(x_start)
+                    # note_object_list.append(m)
                     pass
                 else:
                     print('{}-->{}'.format(note, treble_dict.get(note[0], 0)))
-                    # new_note(x_start, treble_dict.get(note[0], 0), 'quarter')
+                    # n = new_note(x_start, treble_dict.get(note[0], 0), 'quarter')
+                    # note_object_list.append(n)
                     pass
 
                 x_start += x_spacing
-
-    return
+        # return note_object_list
 
 
 # return
