@@ -11,18 +11,18 @@ def drawline(t, length):
     t.backward(length)
 
 
-def draw_5_line(t, length, gap):
+def draw_n_line(t, n, length, gap):
     """Draws 5 lines of length 'length' spaced 'gap' units apart."""
     t.ht()
     t.speed(0)
-    for i in range(5):
+    for i in range(n):
         drawline(t, length)
         t.left(90)
         t.forward(gap)
         t.right(90)
 
 
-def draw_partof_circle(t, radius, frac, goleft, startwide, endwide, n=100):
+def draw_partof_circle(t, radius, frac, goleft=True, startwide=2, endwide=2, n=100):
     """Draws a partial circle or arc approximated by a polygon.
     Line width is linearly interpolated from starting and ending values.
 
@@ -83,11 +83,15 @@ def quarternote(t, x, y, half=False, stem=True):
     half - boolean variable that disables note filling if true
     """
     t.seth(0)
+    t.width(2)
     if y <= -20:
         t.up()
-        t.goto(x - 10, y)
-        t.down()
-        t.forward(25)
+        t.goto(x - 10, y + y % 20)
+        draw_n_line(t=t, n=y // -20, length=25, gap=20)
+    elif y >= 100:
+        t.up()
+        t.goto(x - 10, 100)
+        draw_n_line(t=t, n=y // 20 - 4, length=25, gap=20)
     t.up()
     t.goto(x, y - 8)
     t.down()
@@ -96,9 +100,20 @@ def quarternote(t, x, y, half=False, stem=True):
     flatoval(t, 10)
     t.end_fill()
     if stem:  # draw the stem
-        t.circle(10, 90)
-        t.seth(90)
-        t.forward(70)
+        if y <= -30:  # notes lower than high C
+            t.circle(10, 90)  # circle around to right side
+            t.seth(90)
+            t.forward(40 - y)  # draw stem
+        elif -30 < y < 50:
+            t.circle(10, 90)
+            t.seth(90)
+            t.forward(70)
+        elif 50 <= y <= 100:
+            t.seth(-90)
+            t.forward(65)
+        elif y > 100:
+            t.seth(-90)
+            t.forward(y - 45)
 
 
 def halfnote(t, x, y):
@@ -146,38 +161,86 @@ def read_notes(notestring, x_start=70, x_spacing=30, y_spacing=10):
         treble_dict = dict(zip(note_names, y_values))
         # print(treble_dict)
 
+        note_object_list = []
         for measure in measure_list:
             note_charlist = list(filter(None, re.findall(pattern, measure)))
             note_charlist.append('|')
             # print(note_charlist)
-            note_object_list = []
             for note in note_charlist:
                 if note == '|':
-                    # m = new_measure(x_start)
-                    # note_object_list.append(m)
-                    pass
+                    m = Measure(x_start)
+                    note_object_list.append(m)
                 else:
                     print('{}-->{}'.format(note, treble_dict.get(note[0], 0)))
-                    # n = new_note(x_start, treble_dict.get(note[0], 0), 'quarter')
-                    # note_object_list.append(n)
-                    pass
+                    n = Note(x_start, treble_dict.get(note[0], 0), 'quarter')
+                    print(n)
+                    note_object_list.append(n)
 
                 x_start += x_spacing
-        # return note_object_list
+        return note_object_list
 
 
-# return
+class Note:
+    """ Note class that represents the type and coordinates of a note."""
+
+    def __init__(self, x=0, y=0, type='quarter'):
+        """Create a new Note object at (x,y) with a given type."""
+        self.x = x
+        self.y = y
+        self.type = type
+
+    def getX(self):
+        return self.x
+
+    def getY(self):
+        return self.y
+
+    def getType(self):
+        return self.type
+
+    def draw(self, t):
+        if self.type == 'quarter':
+            quarternote(t, self.x, self.y)
+        elif self.type == 'half':
+            halfnote(t, self.x, self.y)
+
+    def __str__(self):
+        return '{} note at ({}, {})'.format(self.type, self.x, self.y)
+
+
+class Measure:
+    """ Measure class that represents the type and coordinates of a note."""
+
+    def __init__(self, x=0):
+        """Create a new Measure object at x."""
+        self.x = x
+
+    def getX(self):
+        return self.x
+
+    def draw(self, t):
+        t.up()
+        t.ht()
+        t.goto(self.x, 0)
+        t.seth(90)
+        t.down()
+        t.forward(80)
+
+    def __str__(self):
+        return "Measure at x = " + str(self.x)
+
+
 def main():
     s = turtle.Screen()
     border = 0
     aspect_ratio = 1
-    x_max = 630
+    x_max = 1200
     s.setworldcoordinates(0 - border, 20 - x_max / aspect_ratio / 2 - border, x_max - border,
                           x_max / aspect_ratio / 2 + 20 - border)
-    # print(x_max / ((x_max / aspect_ratio / 2) + 20 - (20 - x_max / aspect_ratio / 2)))
+    # print(x_max / ((x_max / aspect_ratio / 2) + 20 - (20 - x_max / aspect_ratio / 2))) should be aspectratio
     # make the stave
     liner = turtle.Turtle()
-    draw_5_line(liner, x_max - border, 20)
+    draw_n_line(liner, 5, x_max - border, 20)
 
     # draw the clef
     # arcy = turtle.Turtle()
@@ -185,16 +248,20 @@ def main():
 
     # read in a notestring and create note objects
     with open('test_notes.txt', 'r') as myfile:
+        list_of_notes = []
         for line in myfile:
-            list_of_notes = read_notes(line)
+            n = read_notes(line)
+            list_of_notes += n
 
     # draw measurelines and notes
     player = turtle.Turtle()
     player.ht()
     player.speed(0)
     player.width(2)
-    # for notes in list_of_notes:
-    # notes.draw()
+
+    for notes in list_of_notes:
+        print(notes)
+        notes.draw(player)
 
     s.exitonclick()
 

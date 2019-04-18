@@ -13,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clef.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="138" column="8" lean-forward="true" selection-start-line="138" selection-start-column="8" selection-end-line="138" selection-end-column="8" />
+            <state relative-caret-position="355">
+              <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -25,16 +25,18 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test_notes.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="71" selection-start-column="71" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>draw</find>
+      <find>draw_5</find>
+      <find>draw_5_lin</find>
+      <find>draw_5_</find>
+      <find>draw_n_line</find>
+      <find>draw</find>
+      <find>quarternote</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,8 +44,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/clef.py" />
         <option value="$PROJECT_DIR$/test_notes.txt" />
+        <option value="$PROJECT_DIR$/clef.py" />
       </list>
     </option>
   </component>
@@ -145,7 +147,21 @@
       <option name="project" value="LOCAL" />
       <updated>1555194831446</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Reformatted, removed measure line code and added structure for notes objects">
+      <created>1555277885617</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1555277885617</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added parsing of text file and placeholders for creating note objects.">
+      <created>1555278236330</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1555278236330</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -173,17 +189,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Reformatted, removed measure line code and added structure for notes objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reformatted, removed measure line code and added structure for notes objects" />
+    <MESSAGE value="Added parsing of text file and placeholders for creating note objects." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added parsing of text file and placeholders for creating note objects." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../lab_4_starting/clef.py" />
-    <entry file="file://$PROJECT_DIR$/clef.py">
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-2062536393/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="138" column="8" lean-forward="true" selection-start-line="138" selection-start-column="8" selection-end-line="138" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="148">
+          <caret line="815" column="8" selection-start-line="815" selection-start-column="8" selection-end-line="815" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -191,6 +205,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="71" selection-start-column="71" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clef.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
