@@ -148,7 +148,7 @@ def read_notes(notestring, x_start=70, x_spacing=30, y_spacing=10):
         pattern = re.compile(r'''
         
         (_?[_=^]?\^?                 # accidentals (optional)
-        [a-g]                        # each note has a letter
+        [a-gz]                        # each note has a letter
         [,']?)                       # followed by punctuation for low or high octave (optional)
         (/?\d*)                      # followed by length modifier (optional, also extract length for spacing)
         
@@ -170,6 +170,9 @@ def read_notes(notestring, x_start=70, x_spacing=30, y_spacing=10):
                 if note == '|':
                     m = Measure(x_start)
                     note_object_list.append(m)
+                elif note[0] == 'z':
+                    z = Rest(x_start)
+                    note_object_list.append(z)
                 else:
                     print('{}-->{}'.format(note, treble_dict.get(note[0], 0)))
                     n = Note(x_start, treble_dict.get(note[0], 0), 'quarter')
@@ -209,7 +212,7 @@ class Note:
 
 
 class Measure:
-    """ Measure class that represents the type and coordinates of a note."""
+    """ Measure class that represents the location of a measure line."""
 
     def __init__(self, x=0):
         """Create a new Measure object at x."""
@@ -228,6 +231,40 @@ class Measure:
 
     def __str__(self):
         return "Measure at x = " + str(self.x)
+
+class Rest:
+    """ Rest class that represents the location and type of a rest."""
+
+    def __init__(self, x=0,type='quarter'):
+        """Create a new Rest object at x."""
+        self.x = x
+        self.type = type
+
+    def getX(self):
+        return self.x
+
+    def draw(self, t):
+        t.up()
+        t.ht()
+        t.goto(self.x - 8, 72)
+        t.seth(-45)
+        t.down()
+        t.width(3)
+        t.forward(25.3)
+        t.right(90)
+        t.forward(2.2)
+        t.width(6)
+        t.forward(16.8)
+        t.width(3)
+        t.forward(2.2)
+        t.left(90)
+        t.forward(15.1)
+        t.backward(1)
+        t.right(140)
+        draw_partof_circle(t, 10, 0.52, startwide=5, endwide=5)
+
+    def __str__(self):
+        return "{} rest at x = {}".format(self.type, self.x)
 
 
 def main():

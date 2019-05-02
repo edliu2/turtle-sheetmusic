@@ -4,6 +4,7 @@
     <list default="true" id="d2d50e8e-c1d7-4e41-8ef7-3b413f26f7a0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clef.py" beforeDir="false" afterPath="$PROJECT_DIR$/clef.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_notes.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,11 +14,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clef.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
+            <state relative-caret-position="374">
+              <caret line="287" column="26" lean-forward="true" selection-start-line="284" selection-end-line="287" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_notes.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="22" selection-start-column="22" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eighthnote.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="95" column="26" lean-forward="true" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="3" selection-start-line="3" selection-end-line="21" selection-end-column="60" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -27,6 +61,13 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>draw</find>
@@ -34,8 +75,11 @@
       <find>draw_5_lin</find>
       <find>draw_5_</find>
       <find>draw_n_line</find>
-      <find>draw</find>
       <find>quarternote</find>
+      <find>startwide=10</find>
+      <find>startwide</find>
+      <find>measure</find>
+      <find>Measure</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -44,8 +88,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/rest.py" />
         <option value="$PROJECT_DIR$/test_notes.txt" />
         <option value="$PROJECT_DIR$/clef.py" />
+        <option value="$PROJECT_DIR$/eighthnote.py" />
       </list>
     </option>
   </component>
@@ -86,6 +132,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Eddie\Desktop\music_project\turtle-sheetmusic" />
       <recent name="C:\Users\Eddie\Desktop\music_project" />
     </key>
   </component>
@@ -101,7 +148,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.eighthnote">
     <configuration name="clef" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="music_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -123,9 +170,53 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="eighthnote" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="music_project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eighthnote.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="rest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="music_project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.eighthnote" />
         <item itemvalue="Python.clef" />
+        <item itemvalue="Python.rest" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1555278236330</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Ledger line and variable stem length functionality">
+      <created>1555630457537</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1555630457537</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -173,14 +271,14 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49966952" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50033045" side_tool="true" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -190,7 +288,19 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Reformatted, removed measure line code and added structure for notes objects" />
     <MESSAGE value="Added parsing of text file and placeholders for creating note objects." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added parsing of text file and placeholders for creating note objects." />
+    <MESSAGE value="Ledger line and variable stem length functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ledger line and variable stem length functionality" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/clef.py</url>
+          <line>166</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../lab_4_starting/clef.py" />
@@ -201,17 +311,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_notes.txt">
+    <entry file="file://$PROJECT_DIR$/clef.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="71" selection-start-column="71" selection-end-column="71" />
+        <state relative-caret-position="374">
+          <caret line="287" column="26" lean-forward="true" selection-start-line="284" selection-end-line="287" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clef.py">
+    <entry file="file://$PROJECT_DIR$/test_notes.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
+        <state>
+          <caret column="22" selection-start-column="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" selection-start-line="3" selection-end-line="21" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eighthnote.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="95" column="26" lean-forward="true" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
