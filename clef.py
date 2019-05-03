@@ -135,6 +135,23 @@ def flatoval(turtle, r):  # Horizontal Oval
         draw_partof_circle(turtle, r, 0.25, True, 1, 4, 25)
         draw_partof_circle(turtle, r / 2, 0.25, True, 4, 1, 25)
 
+def eighth_rest(t,x,y=50):
+    t.up()
+    t.ht()
+    t.goto(x - 8, y)
+    t.down()
+    t.width(2)
+    t.begin_fill()
+    t.circle(5)
+    t.end_fill()
+    t.seth(0)
+    clef.draw_partof_circle(t,13,0.21,n=100,startwide=3,endwide=2)
+    t.backward(33)
+
+def sixteenth_rest(t,x):
+    eighth_rest(t,x,50)
+    eighth_rest(t,x-6,30)
+
 
 def read_notes(notestring, x_start=70, x_spacing=30, y_spacing=10):
     """ Reads in a string from ABC-notation file and creates note objects.
@@ -262,6 +279,7 @@ class Rest:
         t.backward(1)
         t.right(140)
         draw_partof_circle(t, 10, 0.52, startwide=5, endwide=5)
+        t.width(2)
 
     def __str__(self):
         return "{} rest at x = {}".format(self.type, self.x)
