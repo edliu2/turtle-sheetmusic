@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2d50e8e-c1d7-4e41-8ef7-3b413f26f7a0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test_notes2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clef.py" beforeDir="false" afterPath="$PROJECT_DIR$/clef.py" afterDir="false" />
     </list>
@@ -13,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clef.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            <state relative-caret-position="340">
+              <caret line="237" lean-forward="true" selection-start-line="237" selection-end-line="237" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -29,7 +30,16 @@
         <entry file="file://$PROJECT_DIR$/test_notes.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="22" selection-start-column="22" selection-end-column="22" />
+              <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_notes2.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="131" lean-forward="true" selection-start-column="131" selection-end-column="131" />
             </state>
           </provider>
         </entry>
@@ -37,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eighthnote.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="85" column="10" selection-start-line="85" selection-start-column="10" selection-end-line="85" selection-end-column="10" />
+            <state relative-caret-position="255">
+              <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="54" selection-end-column="16" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -46,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+            <state relative-caret-position="100">
+              <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -81,6 +91,19 @@
       <find>Measure</find>
       <find>rest</find>
       <find>quartern</find>
+      <find>Rest</find>
+      <find>test_</find>
+      <find>clef.</find>
+      <find>clf.</find>
+      <find>def draw_t</find>
+      <find>eighth</find>
+      <find>i</find>
+      <find>def sixte</find>
+      <find>sixte</find>
+      <find>sixteen</find>
+      <find>read_notes</find>
+      <find>aspec</find>
+      <find>eighth_rest</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -90,9 +113,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test_notes.txt" />
-        <option value="$PROJECT_DIR$/eighthnote.py" />
-        <option value="$PROJECT_DIR$/clef.py" />
         <option value="$PROJECT_DIR$/rest.py" />
+        <option value="$PROJECT_DIR$/eighthnote.py" />
+        <option value="$PROJECT_DIR$/test_notes2.txt" />
+        <option value="$PROJECT_DIR$/clef.py" />
       </list>
     </option>
   </component>
@@ -149,7 +173,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.rest">
+  <component name="RunManager" selected="Python.clef">
     <configuration name="clef" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="music_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -215,9 +239,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.clef" />
         <item itemvalue="Python.rest" />
         <item itemvalue="Python.eighthnote" />
-        <item itemvalue="Python.clef" />
       </list>
     </recent_temporary>
   </component>
@@ -267,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556823337912</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added functions for eighth and sixteenth rests, need to rework read_notes and draw(Rest) to include">
+      <created>1556845618723</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1556845618723</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -298,15 +329,16 @@
     <MESSAGE value="Added parsing of text file and placeholders for creating note objects." />
     <MESSAGE value="Ledger line and variable stem length functionality" />
     <MESSAGE value="Added quarter rests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added quarter rests" />
+    <MESSAGE value="Added functions for eighth and sixteenth rests, need to rework read_notes and draw(Rest) to include" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added functions for eighth and sixteenth rests, need to rework read_notes and draw(Rest) to include" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/clef.py</url>
-          <line>166</line>
-          <option name="timeStamp" value="1" />
+          <line>335</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -320,37 +352,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="1134" selection-start-line="1134" selection-end-line="1134" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_notes.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="22" selection-start-column="22" selection-end-column="22" />
+          <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eighthnote.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="85" column="10" selection-start-line="85" selection-start-column="10" selection-end-line="85" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/clef.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+        <state relative-caret-position="100">
+          <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eighthnote.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="54" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_notes2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="131" lean-forward="true" selection-start-column="131" selection-end-column="131" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clef.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="237" lean-forward="true" selection-start-line="237" selection-end-line="237" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>

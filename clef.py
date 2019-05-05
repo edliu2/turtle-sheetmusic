@@ -50,7 +50,7 @@ def draw_partof_circle(t, radius, frac, goleft=True, startwide=2, endwide=2, n=1
 
 
 def draw_clef(t, tilt, x, y):
-    """Draws a treble clef starting at position (x,y) with tilt angle 'tilt' using Turtle t.
+    """Draws a treble starting at position (x,y) with tilt angle 'tilt' using Turtle t.
     May not work for tilt angles other than 10.
     """
     t.speed(0)
@@ -78,7 +78,7 @@ def draw_clef(t, tilt, x, y):
     draw_partof_circle(t, 15, 0.4, True, 8, 1)
 
 
-def quarternote(t, x, y, half=False, stem=True):
+def quarternote(t, x, y, half=False, stem=True, flag=False):
     """Draws a music note at position (x,y).
     half - boolean variable that disables note filling if true
     """
@@ -104,16 +104,24 @@ def quarternote(t, x, y, half=False, stem=True):
             t.circle(10, 90)  # circle around to right side
             t.seth(90)
             t.forward(40 - y)  # draw stem
+            if flag:
+                draw_flag_down(t)
         elif -30 < y < 50:
             t.circle(10, 90)
             t.seth(90)
             t.forward(70)
+            if flag:
+                draw_flag_down(t)
         elif 50 <= y <= 100:
             t.seth(-90)
             t.forward(65)
+            if flag:
+                draw_flag_up(t)
         elif y > 100:
             t.seth(-90)
             t.forward(y - 45)
+            if flag:
+                draw_flag_up(t)
 
 
 def halfnote(t, x, y):
@@ -126,6 +134,10 @@ def wholenote(t, x, y):
     quarternote(t, x, y, half=True, stem=False)
 
 
+def eighthnote(t, x, y):
+    quarternote(t, x, y, flag=True)
+
+
 def flatoval(turtle, r):  # Horizontal Oval
     """Draw a horizontal oval with "size" r.
     """
@@ -135,22 +147,71 @@ def flatoval(turtle, r):  # Horizontal Oval
         draw_partof_circle(turtle, r, 0.25, True, 1, 4, 25)
         draw_partof_circle(turtle, r / 2, 0.25, True, 4, 1, 25)
 
-def eighth_rest(t,x,y=50):
+
+def quarter_rest(t, x):
     t.up()
     t.ht()
-    t.goto(x - 8, y)
+    t.goto(x - 8, 72)
+    t.seth(-45)
+    t.down()
+    t.width(3)
+    t.forward(25.3)
+    t.right(90)
+    t.forward(2.2)
+    t.width(6)
+    t.forward(16.8)
+    t.width(3)
+    t.forward(2.2)
+    t.left(90)
+    t.forward(15.1)
+    t.backward(1)
+    t.right(140)
+    draw_partof_circle(t, 10, 0.52, startwide=5, endwide=5)
+    t.width(2)
+
+
+def eighth_rest(t, x, y=50):
+    t.up()
+    t.ht()
+    t.goto(x, y)
     t.down()
     t.width(2)
     t.begin_fill()
     t.circle(5)
     t.end_fill()
     t.seth(0)
-    clef.draw_partof_circle(t,13,0.21,n=100,startwide=3,endwide=2)
+    draw_partof_circle(t, 13, 0.21, n=100, startwide=3, endwide=2)
     t.backward(33)
 
-def sixteenth_rest(t,x):
-    eighth_rest(t,x,50)
-    eighth_rest(t,x-6,30)
+
+def sixteenth_rest(t, x):
+    eighth_rest(t, x + 6, 50)
+    eighth_rest(t, x, 30)
+
+
+def draw_flag_up(t, long=True):
+    t.right(5)
+    t.back(13)
+    t.left(160)
+    t.width(6)
+    draw_partof_circle(t, radius=100, frac=0.035, goleft=False, startwide=6, endwide=4, n=70)
+    if long:
+        draw_partof_circle(t, radius=25, frac=0.22, goleft=True, startwide=4, endwide=2, n=50)
+    else:
+        draw_partof_circle(t, radius=30, frac=0.1, goleft=True, startwide=4, endwide=2, n=50)
+
+
+def draw_flag_down(t, long=True):
+    t.left(5)
+    t.back(13)
+    t.right(160)
+    t.width(6)
+    draw_partof_circle(t, radius=100, frac=0.035, goleft=True, startwide=6, endwide=4, n=70)
+    # t.seth(310)
+    if long:
+        draw_partof_circle(t, radius=25, frac=0.22, goleft=False, startwide=4, endwide=2, n=50)
+    else:
+        draw_partof_circle(t, radius=30, frac=0.1, goleft=False, startwide=4, endwide=2, n=50)
 
 
 def read_notes(notestring, x_start=70, x_spacing=30, y_spacing=10):
@@ -188,11 +249,20 @@ def read_notes(notestring, x_start=70, x_spacing=30, y_spacing=10):
                     m = Measure(x_start)
                     note_object_list.append(m)
                 elif note[0] == 'z':
-                    z = Rest(x_start)
+                    if note[1] == '/2' or note[1] == '/':
+                        z = Rest(x_start, 'eighth')
+                    elif note[1] == '/4':
+                        z = Rest(x_start, 'sixteenth')
+                    else:
+                        z = Rest(x_start)
+                    print(z)
                     note_object_list.append(z)
                 else:
-                    print('{}-->{}'.format(note, treble_dict.get(note[0], 0)))
-                    n = Note(x_start, treble_dict.get(note[0], 0), 'quarter')
+                    # print('{}-->{}'.format(note, treble_dict.get(note[0], 0)))
+                    if note[1] == '/2' or note[1] == '/':
+                        n = Note(x_start, treble_dict.get(note[0], 0), 'eighth')
+                    else:
+                        n = Note(x_start, treble_dict.get(note[0], 0), 'quarter')
                     print(n)
                     note_object_list.append(n)
 
@@ -223,6 +293,8 @@ class Note:
             quarternote(t, self.x, self.y)
         elif self.type == 'half':
             halfnote(t, self.x, self.y)
+        elif self.type == 'eighth':
+            eighthnote(t, self.x, self.y)
 
     def __str__(self):
         return '{} note at ({}, {})'.format(self.type, self.x, self.y)
@@ -249,10 +321,11 @@ class Measure:
     def __str__(self):
         return "Measure at x = " + str(self.x)
 
+
 class Rest:
     """ Rest class that represents the location and type of a rest."""
 
-    def __init__(self, x=0,type='quarter'):
+    def __init__(self, x=0, type='quarter'):
         """Create a new Rest object at x."""
         self.x = x
         self.type = type
@@ -261,25 +334,12 @@ class Rest:
         return self.x
 
     def draw(self, t):
-        t.up()
-        t.ht()
-        t.goto(self.x - 8, 72)
-        t.seth(-45)
-        t.down()
-        t.width(3)
-        t.forward(25.3)
-        t.right(90)
-        t.forward(2.2)
-        t.width(6)
-        t.forward(16.8)
-        t.width(3)
-        t.forward(2.2)
-        t.left(90)
-        t.forward(15.1)
-        t.backward(1)
-        t.right(140)
-        draw_partof_circle(t, 10, 0.52, startwide=5, endwide=5)
-        t.width(2)
+        if self.type == 'quarter':
+            quarter_rest(t, self.x)
+        elif self.type == 'eighth':
+            eighth_rest(t, self.x)
+        elif self.type == 'sixteenth':
+            sixteenth_rest(t, self.x)
 
     def __str__(self):
         return "{} rest at x = {}".format(self.type, self.x)
@@ -289,7 +349,7 @@ def main():
     s = turtle.Screen()
     border = 0
     aspect_ratio = 1
-    x_max = 1200
+    x_max = 1500
     s.setworldcoordinates(0 - border, 20 - x_max / aspect_ratio / 2 - border, x_max - border,
                           x_max / aspect_ratio / 2 + 20 - border)
     # print(x_max / ((x_max / aspect_ratio / 2) + 20 - (20 - x_max / aspect_ratio / 2))) should be aspectratio
@@ -298,14 +358,14 @@ def main():
     draw_n_line(liner, 5, x_max - border, 20)
 
     # draw the clef
-    # arcy = turtle.Turtle()
-    # draw_clef(arcy, 10, 25, -20)
+    arcy = turtle.Turtle()
+    draw_clef(arcy, 10, 25, -20)
 
     # read in a notestring and create note objects
-    with open('test_notes.txt', 'r') as myfile:
+    with open('test_notes2.txt', 'r') as myfile:
         list_of_notes = []
         for line in myfile:
-            n = read_notes(line)
+            n = read_notes(line, x_start=70, x_spacing=40, y_spacing=10)
             list_of_notes += n
 
     # draw measurelines and notes
