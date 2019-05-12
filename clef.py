@@ -1,5 +1,6 @@
 import turtle
 import math
+import re
 
 
 def drawline(t, length):
@@ -10,16 +11,18 @@ def drawline(t, length):
     t.backward(length)
 
 
-def draw_5_line(t, length, gap):
+def draw_n_line(t, n, length, gap):
     """Draws 5 lines of length 'length' spaced 'gap' units apart."""
-    for i in range(5):
+    t.ht()
+    t.speed(0)
+    for i in range(n):
         drawline(t, length)
         t.left(90)
         t.forward(gap)
         t.right(90)
 
 
-def draw_partof_circle(t, radius, frac, goleft, startwide, endwide, n=100):
+def draw_partof_circle(t, radius, frac, goleft=True, startwide=2, endwide=2, n=100):
     """Draws a partial circle or arc approximated by a polygon.
     Line width is linearly interpolated from starting and ending values.
 
@@ -47,9 +50,10 @@ def draw_partof_circle(t, radius, frac, goleft, startwide, endwide, n=100):
 
 
 def draw_clef(t, tilt, x, y):
-    """Draws a treble clef starting at position (x,y) with tilt angle 'tilt' using Turtle t.
+    """Draws a treble starting at position (x,y) with tilt angle 'tilt' using Turtle t.
     May not work for tilt angles other than 10.
     """
+    t.speed(0)
     t.up()
     t.seth(0)
     t.goto(x + 3, y)
@@ -74,16 +78,20 @@ def draw_clef(t, tilt, x, y):
     draw_partof_circle(t, 15, 0.4, True, 8, 1)
 
 
-def quarternote(t, x, y, half=False, stem=True):
+def quarternote(t, x, y, half=False, stem=True, flag=False):
     """Draws a music note at position (x,y).
     half - boolean variable that disables note filling if true
     """
     t.seth(0)
+    t.width(2)
     if y <= -20:
         t.up()
-        t.goto(x - 10, y)
-        t.down()
-        t.forward(25)
+        t.goto(x - 10, y + y % 20)
+        draw_n_line(t=t, n=y // -20, length=25, gap=20)
+    elif y >= 100:
+        t.up()
+        t.goto(x - 10, 100)
+        draw_n_line(t=t, n=y // 20 - 4, length=25, gap=20)
     t.up()
     t.goto(x, y - 8)
     t.down()
@@ -92,9 +100,28 @@ def quarternote(t, x, y, half=False, stem=True):
     flatoval(t, 10)
     t.end_fill()
     if stem:  # draw the stem
-        t.circle(10, 90)
-        t.seth(90)
-        t.forward(70)
+        if y <= -30:  # notes lower than high C
+            t.circle(10, 90)  # circle around to right side
+            t.seth(90)
+            t.forward(40 - y)  # draw stem
+            if flag:
+                draw_flag_down(t)
+        elif -30 < y < 50:
+            t.circle(10, 90)
+            t.seth(90)
+            t.forward(70)
+            if flag:
+                draw_flag_down(t)
+        elif 50 <= y <= 100:
+            t.seth(-90)
+            t.forward(65)
+            if flag:
+                draw_flag_up(t)
+        elif y > 100:
+            t.seth(-90)
+            t.forward(y - 45)
+            if flag:
+                draw_flag_up(t)
 
 
 def halfnote(t, x, y):
@@ -107,6 +134,10 @@ def wholenote(t, x, y):
     quarternote(t, x, y, half=True, stem=False)
 
 
+def eighthnote(t, x, y):
+    quarternote(t, x, y, flag=True)
+
+
 def flatoval(turtle, r):  # Horizontal Oval
     """Draw a horizontal oval with "size" r.
     """
@@ -117,70 +148,238 @@ def flatoval(turtle, r):  # Horizontal Oval
         draw_partof_circle(turtle, r / 2, 0.25, True, 4, 1, 25)
 
 
-def draw_measure(t, init_gap, measure_gap, num_lines):
-    t.left(90)
-    drawline(t, 80)
+def quarter_rest(t, x):
+    t.up()
+    t.ht()
+    t.goto(x - 8, 72)
+    t.seth(-45)
+    t.down()
+    t.width(3)
+    t.forward(25.3)
     t.right(90)
-    t.forward(init_gap)
+    t.forward(2.2)
+    t.width(6)
+    t.forward(16.8)
+    t.width(3)
+    t.forward(2.2)
     t.left(90)
-    drawline(t, 80)
-    for i in range(num_lines):
-        t.right(90)
-        t.forward(measure_gap)
-        t.left(90)
-        drawline(t, 80)
+    t.forward(15.1)
+    t.backward(1)
+    t.right(140)
+    draw_partof_circle(t, 10, 0.52, startwide=5, endwide=5)
+    t.width(2)
 
 
-# def notes(notestring):
-#     pass
-# for char in notestring:
+def eighth_rest(t, x, y=50):
+    t.up()
+    t.ht()
+    t.goto(x, y)
+    t.down()
+    t.width(2)
+    t.begin_fill()
+    t.circle(5)
+    t.end_fill()
+    t.seth(0)
+    draw_partof_circle(t, 13, 0.21, n=100, startwide=3, endwide=2)
+    t.backward(33)
 
-# return coordinates
+
+def sixteenth_rest(t, x):
+    eighth_rest(t, x + 6, 50)
+    eighth_rest(t, x, 30)
 
 
-s = turtle.Screen()
-border = 0
-aspect_ratio = 1
-x_max = 630
-s.setworldcoordinates(0 - border, 20 - x_max / aspect_ratio / 2 - border, x_max - border,
-                      x_max / aspect_ratio / 2 + 20 - border)
-# print(x_max / ((x_max / aspect_ratio / 2) + 20 - (20 - x_max / aspect_ratio / 2)))
-# make the stave
-liner = turtle.Turtle()
-liner.ht()
-liner.speed(0)
-draw_5_line(liner, x_max - border, 20)
+def draw_flag_up(t, long=True):
+    t.right(5)
+    t.back(13)
+    t.left(160)
+    t.width(6)
+    draw_partof_circle(t, radius=100, frac=0.035, goleft=False, startwide=6, endwide=4, n=70)
+    if long:
+        draw_partof_circle(t, radius=25, frac=0.22, goleft=True, startwide=4, endwide=2, n=50)
+    else:
+        draw_partof_circle(t, radius=30, frac=0.1, goleft=True, startwide=4, endwide=2, n=50)
 
-# draw the clef
-arcy = turtle.Turtle()
-arcy.speed(0)
-draw_clef(arcy, 10, 25, -20)
 
-# draw measurelines
-meas = turtle.Turtle()
-meas.ht()
-meas.width(2)
-draw_measure(meas, 190, 150, 3)
+def draw_flag_down(t, long=True):
+    t.left(5)
+    t.back(13)
+    t.right(160)
+    t.width(6)
+    draw_partof_circle(t, radius=100, frac=0.035, goleft=True, startwide=6, endwide=4, n=70)
+    # t.seth(310)
+    if long:
+        draw_partof_circle(t, radius=25, frac=0.22, goleft=False, startwide=4, endwide=2, n=50)
+    else:
+        draw_partof_circle(t, radius=30, frac=0.1, goleft=False, startwide=4, endwide=2, n=50)
 
-# draw notes
-# notes('CCGGHHG*FFEEDDC*')
-player = turtle.Turtle()
-player.ht()
-player.speed(0)
-player.width(2)
-quarternote(player, 70, -20)
-quarternote(player, 100, -20)
-quarternote(player, 130, 20)
-quarternote(player, 160, 20)
-quarternote(player, 220, 30)
-quarternote(player, 250, 30)
-halfnote(player, 280, 20)
-quarternote(player, 370, 10)
-quarternote(player, 400, 10)
-quarternote(player, 430, 0)
-quarternote(player, 460, 0)
-quarternote(player, 520, -10)
-quarternote(player, 550, -10)
-halfnote(player, 580, -20)
 
-s.exitonclick()
+def read_notes(notestring, x_start=70, x_spacing=30, y_spacing=10):
+    """ Reads in a string from ABC-notation file and creates note objects.
+    Does not handle headers at the moment.
+    """
+    header = re.match(r'.:', notestring)
+    if header:  # Headers are currently not supported
+        return None
+    else:
+        measure_list = notestring.split('|')
+        pattern = re.compile(r'''
+        
+        (_?[_=^]?\^?                 # accidentals (optional)
+        [a-gz]                        # each note has a letter
+        [,']?)                       # followed by punctuation for low or high octave (optional)
+        (/?\d*)                      # followed by length modifier (optional, also extract length for spacing)
+        
+        ''', flags=re.IGNORECASE | re.VERBOSE)
+        note_names = ('C,', 'D,', 'E,', 'F,', 'G,', 'A,', 'B,',
+                      'C', 'D', 'E', 'F', 'G', 'A', 'B',
+                      'c', 'd', 'e', 'f', 'g', 'a', 'b',
+                      "c'", "d'", "e'", "f'", "g'", "a'", "b'")
+        y_values = range(-9 * y_spacing, 19 * y_spacing, y_spacing)
+        treble_dict = dict(zip(note_names, y_values))
+        # print(treble_dict)
+
+        note_object_list = []
+        for measure in measure_list:
+            note_charlist = list(filter(None, re.findall(pattern, measure)))
+            note_charlist.append('|')
+            # print(note_charlist)
+            for note in note_charlist:
+                if note == '|':
+                    m = Measure(x_start)
+                    note_object_list.append(m)
+                elif note[0] == 'z':
+                    if note[1] == '/2' or note[1] == '/':
+                        z = Rest(x_start, 'eighth')
+                    elif note[1] == '/4':
+                        z = Rest(x_start, 'sixteenth')
+                    else:
+                        z = Rest(x_start)
+                    print(z)
+                    note_object_list.append(z)
+                else:
+                    # print('{}-->{}'.format(note, treble_dict.get(note[0], 0)))
+                    if note[1] == '/2' or note[1] == '/':
+                        n = Note(x_start, treble_dict.get(note[0], 0), 'eighth')
+                    else:
+                        n = Note(x_start, treble_dict.get(note[0], 0), 'quarter')
+                    print(n)
+                    note_object_list.append(n)
+
+                x_start += x_spacing
+        return note_object_list
+
+
+class Note:
+    """ Note class that represents the type and coordinates of a note."""
+
+    def __init__(self, x=0, y=0, type='quarter'):
+        """Create a new Note object at (x,y) with a given type."""
+        self.x = x
+        self.y = y
+        self.type = type
+
+    def getX(self):
+        return self.x
+
+    def getY(self):
+        return self.y
+
+    def getType(self):
+        return self.type
+
+    def draw(self, t):
+        if self.type == 'quarter':
+            quarternote(t, self.x, self.y)
+        elif self.type == 'half':
+            halfnote(t, self.x, self.y)
+        elif self.type == 'eighth':
+            eighthnote(t, self.x, self.y)
+
+    def __str__(self):
+        return '{} note at ({}, {})'.format(self.type, self.x, self.y)
+
+
+class Measure:
+    """ Measure class that represents the location of a measure line."""
+
+    def __init__(self, x=0):
+        """Create a new Measure object at x."""
+        self.x = x
+
+    def getX(self):
+        return self.x
+
+    def draw(self, t):
+        t.up()
+        t.ht()
+        t.goto(self.x, 0)
+        t.seth(90)
+        t.down()
+        t.forward(80)
+
+    def __str__(self):
+        return "Measure at x = " + str(self.x)
+
+
+class Rest:
+    """ Rest class that represents the location and type of a rest."""
+
+    def __init__(self, x=0, type='quarter'):
+        """Create a new Rest object at x."""
+        self.x = x
+        self.type = type
+
+    def getX(self):
+        return self.x
+
+    def draw(self, t):
+        if self.type == 'quarter':
+            quarter_rest(t, self.x)
+        elif self.type == 'eighth':
+            eighth_rest(t, self.x)
+        elif self.type == 'sixteenth':
+            sixteenth_rest(t, self.x)
+
+    def __str__(self):
+        return "{} rest at x = {}".format(self.type, self.x)
+
+
+def main():
+    s = turtle.Screen()
+    border = 0
+    aspect_ratio = 1
+    x_max = 1500
+    s.setworldcoordinates(0 - border, 20 - x_max / aspect_ratio / 2 - border, x_max - border,
+                          x_max / aspect_ratio / 2 + 20 - border)
+    # print(x_max / ((x_max / aspect_ratio / 2) + 20 - (20 - x_max / aspect_ratio / 2))) should be aspectratio
+    # make the stave
+    liner = turtle.Turtle()
+    draw_n_line(liner, 5, x_max - border, 20)
+
+    # draw the clef
+    arcy = turtle.Turtle()
+    draw_clef(arcy, 10, 25, -20)
+
+    # read in a notestring and create note objects
+    with open('test_notes2.txt', 'r') as myfile:
+        list_of_notes = []
+        for line in myfile:
+            n = read_notes(line, x_start=70, x_spacing=40, y_spacing=10)
+            list_of_notes += n
+
+    # draw measurelines and notes
+    player = turtle.Turtle()
+    player.ht()
+    player.speed(0)
+    player.width(2)
+
+    for notes in list_of_notes:
+        print(notes)
+        notes.draw(player)
+
+    s.exitonclick()
+
+
+if __name__ == '__main__':
+    main()
